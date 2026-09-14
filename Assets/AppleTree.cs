@@ -10,9 +10,17 @@ public class AppleTree : MonoBehaviour
     public float leftAndRightEdge = 10f;
     public float changeDirChance = 0.1f;
     public float appleDropDelay = 1f;
+    
+    void DropApple()
+    {
+        GameObject apple = Instantiate<GameObject>(applePrefab);
+        apple.transform.position = transform.position;
+        Invoke("DropApple", appleDropDelay);
+    }
+    
     void Start()
     {
-        
+        Invoke("DropApple", 2f);
     }
 
     // Update is called once per frame
@@ -31,11 +39,13 @@ public class AppleTree : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (Random.value < changeDirChance)
         {
             speed *= -1;
         }
     }
+
+
 }
