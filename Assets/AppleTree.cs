@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AppleTree : MonoBehaviour
 {
@@ -19,6 +21,21 @@ public class AppleTree : MonoBehaviour
         Vector3 pos = transform.position;
         pos.x += speed * Time.deltaTime;
         transform.position = pos;
-        
+
+        if (pos.x < -leftAndRightEdge) 
+        {
+            speed = Mathf.Abs(speed);
+        } else if (pos.x > leftAndRightEdge)
+        {
+            speed = -Mathf.Abs(speed);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Random.value < changeDirChance)
+        {
+            speed *= -1;
+        }
     }
 }
